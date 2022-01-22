@@ -15,6 +15,7 @@ services:
     build: ./backend/
     volumes:
       - ./backend:/app
+      - data-volume:/app/static
     ports:
       - 8000:8000
     image: app:backend
@@ -27,3 +28,13 @@ services:
     command: python manage.py runserver 0.0.0.0:8000
     depends_on:
       - db
+  frontend:
+    build: ./frontend/
+    volumes:
+      - ./frontend:/frontend
+      - data-volume:/frontend/static
+    container_name: frontend_container
+    command: npm run dev
+
+volumes:
+  data-volume:
