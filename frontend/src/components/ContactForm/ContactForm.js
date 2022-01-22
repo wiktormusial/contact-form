@@ -1,12 +1,13 @@
 import React from 'react'
 import { Formik, Form, Field } from 'formik';
+import { contactSend } from '../../api/contactSend'
 import { ContactFormValidationSchema } from './ContactFormValidationSchema'
 
 
 export default function ContactForm() {
 
   function formSubmit(values) {
-    alert(values)
+    contactSend(values)
   }
 
   return (
