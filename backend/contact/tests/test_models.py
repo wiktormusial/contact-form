@@ -1,5 +1,6 @@
 from django.test import TestCase
 from contact.models import MailerSettings
+from contact.models import Category
 
 
 class MailerSettingsTestCase(TestCase):
@@ -27,3 +28,17 @@ class MailerSettingsTestCase(TestCase):
 
     def test_do_not_allow_to_create_2_objects(self):
         self.assertEqual(MailerSettings.objects.count(), 1)
+
+
+class CategoriesTestCase(TestCase):
+    def setUp(self):
+        Category.objects.create(title="Test category 1")
+        Category.objects.create(title="Test category 2")
+        Category.objects.create(title="Test category 3")
+
+    def test_category_have_title(self):
+        obj = Category.objects.get(title="Test category 1")
+        self.assertEqual(obj.__str__(), "Test category 1")
+
+    def test_can_add_many_categories(self):
+        self.assertEqual(Category.objects.count(), 3)
