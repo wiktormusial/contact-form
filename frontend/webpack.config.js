@@ -3,6 +3,9 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
+  resolve: {
+    extensions: ['*', '.js', '.jsx'],
+  },
   output: {
     filename: 'index-bundle.js',
     path: path.resolve(__dirname, "static/js")
