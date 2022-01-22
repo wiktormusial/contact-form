@@ -1,5 +1,7 @@
 import React from 'react'
 import { Formik, Form, Field } from 'formik';
+import { ContactFormValidationSchema } from './ContactFormValidationSchema'
+
 
 export default function ContactForm() {
 
@@ -17,6 +19,7 @@ export default function ContactForm() {
           body: '',
           category: 1,
         }}
+        validationSchema={ContactFormValidationSchema}
         onSubmit={(values) => formSubmit(values)}
       >
       {({ errors, touched  }) => (
