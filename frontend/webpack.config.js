@@ -5,7 +5,7 @@ module.exports = {
   entry: './src/index.js',
   output: {
     filename: 'index-bundle.js',
-    path: path.resolve(path.normalize('../backend/'), './static/js'),
+    path: path.resolve(__dirname, "static/js")
   },
   plugins: [
     new ESLintPlugin()
