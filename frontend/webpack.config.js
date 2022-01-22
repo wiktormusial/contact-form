@@ -8,7 +8,9 @@ module.exports = {
     path: path.resolve(__dirname, "static/js")
   },
   plugins: [
-    new ESLintPlugin()
+    new ESLintPlugin({
+      extensions: ['js', 'jsx']
+    })
   ],
   module: {
     rules: [
