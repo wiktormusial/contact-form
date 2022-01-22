@@ -15,3 +15,10 @@ class MailerSettings(models.Model):
             pass
         else:
             return super(MailerSettings, self).save(*args, **kwargs)
+
+
+class Category(models.Model):
+    title = models.TextField()
+
+    def __str__(self):
+        return self.title
