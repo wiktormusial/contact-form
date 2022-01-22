@@ -1,7 +1,41 @@
 import React from 'react'
+import { Formik, Form, Field } from 'formik';
 
 export default function ContactForm() {
+
+  function formSubmit(values) {
+    alert(values)
+  }
+
   return (
-    <h1>ContactForm</h1>
+    <div>
+      <h1>Contact Us</h1>
+      <Formik
+        initialValues={{
+          author: '',
+          title: '',
+          body: '',
+          category: 1,
+        }}
+        onSubmit={(values) => formSubmit(values)}
+      >
+      {({ errors, touched  }) => (
+        <Form>
+          <Field type="email" name="author"/><br/>
+          {errors.author && touched.author && <div>{errors.author}</div>}
+          <Field name="title"/><br/>
+          {errors.title && touched.title && <div>{errors.title}</div>}
+          <Field name="body" as="textarea"/><br/>
+          {errors.body && touched.body && <div>{errors.body}</div>}
+          <Field name="category" as="select">
+            <option value="1">Cooperation Proposal</option>
+          </Field><br/>
+          <button type="submit">
+            Submit
+          </button>
+        </Form>
+      )}
+      </Formik>
+    </div>
   )
 }
