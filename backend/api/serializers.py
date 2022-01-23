@@ -15,16 +15,15 @@ class SendMailSerializer(serializers.Serializer):
             raise serializers.ValidationError('invalid category')
         return value
 
-    def create(self, validated_data):
+    def save(self):
         settings = MailerSettings.objects.all().first()
         mailer = mailsender.MailSender(settings.EMAIL_HOST, settings.EMAIL_PORT,
                                        settings.EMAIL_HOST_USER, settings.EMAIL_HOST_PASSWORD)
-        title = validated_data['title']
-        body = validated_data['body']
-        author = validated_data['author']
-        category = validated_data['category']
+        title = self.validated_data['title']
+        body = self.validated_data['body']
+        author = self.validated_data['author']
+        category = self.validated_data['category']
         msg_title = f'[{category}]: {title}'
         msg_content = f'{author} send: \n{body}'
 
-        mailer.write(msg_title, author, msg_content)
-        return validated_data
+        mailer.write(msg_title, settings.EMAIL_HOST_USER, msg_content)
