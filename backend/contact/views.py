@@ -1,8 +1,10 @@
 from django.views.generic import TemplateView
-from django.views.generic import View
+from django.views.generic import CreateView
 from django.shortcuts import redirect
-from django.http import HttpResponse
+
 from .models import MailerSettings
+from .forms import ConfigureForm
+
 
 class ContactView(TemplateView):
     template_name = "contact/index.html"
@@ -14,6 +16,15 @@ class ContactView(TemplateView):
         else:
             return self.render_to_response(context)
 
-class ConfigureView(View):
-    def get(self, request):
-        return HttpResponse("test")
+
+class ConfigureView(CreateView):
+    form_class = ConfigureForm
+    model = MailerSettings
+    template_name = "contact/configure.html"
+    success_url = '/contact'
+
+    def get(self, request, *args, **kwargs):
+        if MailerSettings.objects.exists():
+            return redirect('index')
+        else:
+            return super().get(request, *args, **kwargs)

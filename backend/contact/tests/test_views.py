@@ -15,3 +15,7 @@ class ViewsTestCase(TestCase):
     def test_index_view_redirect_to_configure(self):
         response = self.client.get(reverse('index'))
         self.assertRedirects(response, reverse('configure'))
+
+    def test_configure_view_use_correct_template(self):
+        response = self.client.get(reverse('configure'))
+        self.assertTemplateUsed(response, 'contact/configure.html')
