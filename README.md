@@ -1,5 +1,5 @@
-
 # contact-form
+Hybrid app using Django backend, and Django Templates mixed with React.
 
 SMTP server configuration
 ![confiugre server view](https://i.ibb.co/V20sk84/Zrzut-ekranu-2022-01-23-o-21-23-41.png)
