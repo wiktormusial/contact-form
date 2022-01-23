@@ -8,7 +8,7 @@ module.exports = {
   },
   output: {
     filename: 'index-bundle.js',
-    path: path.resolve(__dirname, "static/js")
+    path: path.resolve(__dirname, "./static/js/"),
   },
   plugins: [
     new ESLintPlugin({
@@ -22,8 +22,8 @@ module.exports = {
         exclude: /node_modules/,
         loader: "babel-loader",
         options: {
-          presets: ["@babel/preset-env", "@babel/preset-react"], 
-          plugins: ["@babel/plugin-transform-runtime"]
+          presets: ["@babel/preset-env", "@babel/preset-react"],
+          plugins: ["@babel/plugin-transform-runtime", "@emotion"]
         }
       },
     ]

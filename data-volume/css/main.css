@@ -1,0 +1,38 @@
+body {
+  background-color: #EE7788;
+}
+
+.form-element {
+  width: 100%;
+  margin-top: 15px
+}
+
+.app-container {
+  padding: 20px;
+  margin-top: 30px;
+  max-height: 600px;
+  min-height: 400px;
+  background-color: white;
+  border: 1px solid #EE7788;
+  box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.69);
+  -webkit-box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.69);
+  -moz-box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.69);
+}
+
+.btn-primary {
+  width: 30%;
+  background-color: #EE7788;
+  border-color: #EE7788
+}
+
+.btn-primary:hover {
+  background-color: #EE7788;
+  border-color: #EE7788
+}
+
+.spinner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
