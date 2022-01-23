@@ -1,9 +1,26 @@
 {% extends 'base.html' %}
 {% block title %}Configure{% endblock %}
 {% block content %}
-<form method="post">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Submit">
-</form>
+<div class="container">
+  <div class="row justify-content-md-center"">
+    <div class="col col-lg-5 app-container">
+      <h1>Configure server</h1>
+      <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+          <div class="form-element">
+            <label for={{field.name}}>{{ field.label_tag }}</label>
+            {{ field }}
+          </div>
+        {% endfor %}
+        {% for error in form.non_field_errors %}
+          <div class="alert alert-danger form-element">
+            <strong>{{ error|escape }}</strong>
+          </div>
+        {% endfor %}
+        <button type="submit" class="form-element btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
 {% endblock %}
