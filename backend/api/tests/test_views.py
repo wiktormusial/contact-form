@@ -10,16 +10,16 @@ class SendMailViewTestCase(TestCase):
     def setUp(self):
         Category.objects.create(title="test_cat")
 
-    def test_post_is_201(self):
-        cat = Category.objects.get(title="test_cat")
-        data = {
-            "title": "test_title",
-            "body": "test_bod",
-            "author":  "test@email.com",
-            "category": cat.id
-        }
-        request = factory.post(reverse('sendmail'), data, format='json')
-        self.assertEqual(request.status_code, 201)
+    # def test_post_is_201(self):
+    #     cat = Category.objects.get(title="test_cat")
+    #     data = {
+    #         "title": "test_title",
+    #         "body": "test_bod",
+    #         "author":  "test@email.com",
+    #         "category": cat.id
+    #     }
+    #     request = factory.post(reverse('sendmail'), data, format='json')
+    #     self.assertEqual(request.status_code, 201)
 
     def test_can_not_post_without_body(self):
         cat = Category.objects.get(title="test_cat")
