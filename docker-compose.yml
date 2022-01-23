@@ -15,7 +15,7 @@ services:
     build: ./backend/
     volumes:
       - ./backend:/app
-      - data-volume:/app/static
+      - ./data-volume:/app/static/
     ports:
       - 8000:8000
     image: app:backend
@@ -32,9 +32,10 @@ services:
     build: ./frontend/
     volumes:
       - ./frontend:/frontend
-      - data-volume:/frontend/static
+      - ./data-volume:/frontend/static
     container_name: frontend_container
     command: npm run dev
 
 volumes:
   data-volume:
+    driver: local
