@@ -1,9 +1,12 @@
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 from django.views.generic import CreateView
+from django.views.generic import View
 from django.shortcuts import redirect
 
-from .models import MailerSettings
-from .forms import ConfigureForm
+from .models import MailerSettings, Category
+from .forms import ConfigureForm, EditorFormCategory
 
 
 class ContactView(TemplateView):
@@ -28,3 +31,25 @@ class ConfigureView(CreateView):
             return redirect('index')
         else:
             return super().get(request, *args, **kwargs)
+
+
+class EditorView(CreateView):
+    template_name = "contact/editor.html"
+    form_class = EditorFormCategory
+    success_url = "/contact/editor"
+    template_name_suffix = 'None'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(EditorView, self).get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
+
+
+class EditorCategoryDeleteView(View):
+    def get(self, request, *args, **kwargs):
+        Category.objects.get(pk=self.kwargs['pk']).delete()
+        return redirect('edit')
