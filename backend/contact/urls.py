@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import ContactView, ConfigureView
+from .views import ContactView, ConfigureView, EditorView
 
 urlpatterns = [
     path('', ContactView.as_view(), name="index"),
