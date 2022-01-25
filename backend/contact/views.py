@@ -1,3 +1,4 @@
+from django.core import serializers
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
@@ -14,6 +15,9 @@ class ContactView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)
+        data = serializers.serialize('json', Category.objects.all(), fields=('pk', 'title'))
+        context['categories'] = data
+
         if not MailerSettings.objects.count() == 1:
             return redirect('configure')
         else:
