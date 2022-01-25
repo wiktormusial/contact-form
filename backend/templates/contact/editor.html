@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <div class="row justify-content-md-center"">
+    <div class="col col-lg-10 app-container">
+      <h1>Edit</h1>
+      <hr>
+      <div id="editor">
+        <div class="row">
+          <div class="col-lg-3">
+            <div class="category-list">
+            <ul>
+            {% for category in categories %}
+              <a href="{% url 'deletecategory' category.pk %}"><li class="category text-left">{{ category.title }}</li></a>
+            {% empty %}
+            </ul>
+              <h3>No categories</h3>
+            {% endfor %}
+            </div>
+          </div>
+          <div class="col-lg-9">
+            <h3>Add form category</h3>
+            <form method="post">
+              {% csrf_token %}
+              <div class="form-group">
+              {% for field in form %}
+              <div class="form-element">
+              <label for={{field.name}}>{{ field.label_tag }}</label></br>
+                {{ field }}
+              </div></br>
+              {% endfor %}
+              <button type="submit" class="btn btn-primary">Add</button>
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

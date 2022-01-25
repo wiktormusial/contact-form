@@ -1,7 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from utils.mailsender import mailsender
-from .models import MailerSettings
+from .models import MailerSettings, Category
 
 
 class ConfigureForm(forms.ModelForm):
@@ -30,3 +30,13 @@ class ConfigureForm(forms.ModelForm):
             raise ValidationError(
                 "Something went wrong during authentication process, try again",
                 code='connection_error')
+
+
+class EditorFormCategory(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = ['title']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['title'].widget.attrs.update({'class': 'form-control'})

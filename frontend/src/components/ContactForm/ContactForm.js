@@ -8,6 +8,12 @@ import { ContactFormSuccess } from './ContactFormSuccess'
 export default function ContactForm() {
   const [status, setStatus] = useState("idle")
 
+  const categories = category_list.map((item) => {
+    return (
+      <option value={item.pk} key={item.pk}>{item.fields.title}</option>
+    )
+  })
+
   function formSubmit(values) {
     setStatus("loading")
     contactSend(values)
@@ -47,7 +53,7 @@ export default function ContactForm() {
             <div className="form-element">
               <label htmlFor="category">Category</label>
               <Field className="form-select" name="category" as="select">
-                <option value="1">Cooperation Proposal</option>
+                {categories}
               </Field>
             </div>
             <div className="form-element">
